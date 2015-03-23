@@ -5,7 +5,7 @@ from random import randint, uniform
 class GeneticAlgorithm:
     pop_size = 100
     pop_limit = 100
-    num_color = 5
+    num_color = 2
     num_ch = sum(1 for line in open('input.txt'))
     px = 0.5
     pm = 0.01
