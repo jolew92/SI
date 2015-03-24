@@ -6,9 +6,10 @@ import static java.util.Collections.*;
 
 public class Main {
 
-    protected static String graphFileName = "input.txt";
+    protected static String graphFileName = "le450 25c.txt";
     protected static double crossProbability = 0.75;
     protected static double mutationProbability = 0.001;
+    protected static double parentMutationProbability = 0.05;
     protected static int colors = 25;
     protected static int populationSize = 100;
     protected static int generations = 1000;
@@ -16,7 +17,7 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
         Graph g = new Graph();
         g.loadFromFile(graphFileName);
-        PrintWriter save = new PrintWriter("output.txt");
+        PrintWriter save = new PrintWriter("output9.txt");
         GeneticAlgorithm ga = new GeneticAlgorithm(g, colors);
         List<Integer[]> population = ga.init(populationSize);
         for(int i=0; i<generations && ga.getBest()!=0; i++) {
@@ -33,7 +34,7 @@ public class Main {
                 //Collections.shuffle(population);
                 List<Integer[]> new_subjects = ga.crossover(ga.selection(population), ga.selection(population), crossProbability);
                 if(!ga.getCrossed()) {
-                    new_subjects = ga.mutation(new_subjects, 0.1);
+                    new_subjects = ga.mutation(new_subjects, parentMutationProbability);
                     new_population.add(new_subjects.get(0));
                     new_population.add(new_subjects.get(1));
                 }
